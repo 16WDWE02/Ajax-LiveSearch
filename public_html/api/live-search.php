@@ -6,6 +6,9 @@ include("../../config.inc.php");
 // Connect to the database
 $dbc = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
+//Set Sortby
+$SortBy = $_GET['sort'];
+
 //Filter the search query
 $searchQuery = $dbc->real_escape_string($_GET['query']);
 
@@ -14,7 +17,7 @@ $sql = "SELECT first_name, last_name, email_address, phone
 		FROM customers
 		WHERE CONCAT(first_name, ' ', last_name)
 		LIKE '%$searchQuery%'
-		ORDER BY first_name ASC
+		ORDER BY $SortBy ASC
 		LIMIT 5";
 
 //Run the Query

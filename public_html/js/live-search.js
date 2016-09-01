@@ -2,6 +2,8 @@ $(document).ready(function(){
 
 	$('#customer-name').keyup(function(){
 
+		var SortBy = $('[name=sort]:checked').val();
+
 		//If there is nothing in the search bar
 		if($(this).val() == ''){
 			return;
@@ -11,6 +13,9 @@ $(document).ready(function(){
 		$.ajax({
 			type: 'get',
 			url: 'api/live-search.php?query='+$(this).val(),
+			data: {
+				sort:SortBy
+			},
 			success:function(dataFromServer){
 				console.log(dataFromServer);
 				$('#results').html('');
